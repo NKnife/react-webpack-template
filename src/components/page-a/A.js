@@ -7,7 +7,6 @@ class Element extends Component {
 		super(props);
 		// 初始化 state
 		this.state = {
-			test: this.props.obj,
 			bool: false,
 		}
 	}
@@ -25,26 +24,44 @@ class Element extends Component {
 	}
 	render() {
 		// 条件渲染
-		let component = <span>toggle</span>;
+		let component = <span> Toggle</span>;
 		if (this.state.bool) {
 			// 列表渲染
-			component = [1,2].map(e => {
-				return <span key={e}>changed </span>;
+			component = [1].map(e => {
+				return <span key={e}> Changed </span>;
 			});
 		}
 		// 返回组件
 		return <h1 onClick={this.setClick}>
-			Test,
-			{this.props.name}
-			{component}
 			<ReactCSSTransitionGroup
-				transitionName="test"
+				transitionName="tran"
 				transitionEnterTimeout={1000}
 				transitionLeaveTimeout={1000}
 			>
 				{/* 动画组件下的元素必须有key */}
-				<span key={this.state.bool ? 1: 0}>{this.state.bool && 145}</span>
+				<span key={this.state.bool ? 1 : 0}> Animate <br /></span>
 			</ReactCSSTransitionGroup>
+			{this.props.name} <br />
+			{component} <br />
+			<style jsx>{`
+				h1 {
+					color: #ccc;
+				}
+				.tran-enter {
+					opacity: 0.01;
+				}
+				.tran-enter.tran-enter-active {
+					opacity: 1;
+					transition: opacity 500ms ease-in;
+				}
+				.tran-leave {
+					opacity: 1;
+				}
+				.tran-leave.tran-leave-active {
+					opacity: 0.01;
+					transition: opacity 300ms ease-in;
+				}
+			`}</style>
 		</h1>;
 	}
 }

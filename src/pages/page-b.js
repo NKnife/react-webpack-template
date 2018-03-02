@@ -13,7 +13,11 @@ class Page extends Component {
 	render() {
 		return (
 			<div>
+				{this.props.stateName}
 				<style jsx>{`
+					div {
+						color: #fff;
+					}
 				`}</style>
 			</div>
 		);

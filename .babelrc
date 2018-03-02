@@ -9,7 +9,15 @@
     "stage-2",
     "react"
   ],
-  "plugins": ["transform-runtime"],
+  "plugins": [
+    "transform-runtime",
+    [
+      "styled-jsx/babel",
+      {
+        "plugins": [ "styled-jsx-plugin-sass" ]
+      }
+    ]
+  ],
   "env": {
     "test": {
       "presets": ["env", "stage-2", "react"],

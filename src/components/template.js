@@ -11,6 +11,8 @@ class Element extends Component {
 	render() {
 		return <div>
 
+			<style jsx>{`
+			`}</style>
 		</div>;
 	}
 }

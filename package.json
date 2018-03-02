@@ -7,8 +7,10 @@
     "react": "^16.2.0",
     "react-addons-css-transition-group": "^15.6.2",
     "react-dom": "^16.2.0",
+    "react-redux": "^5.0.7",
     "react-router-dom": "^4.2.2",
-    "react-scripts": "1.1.0"
+    "react-scripts": "1.1.0",
+    "redux": "^3.7.2"
   },
   "scripts": {
     "dev": "node build/dev.js",
@@ -44,6 +46,7 @@
     "sass-loader": "^6.0.6",
     "shelljs": "^0.8.1",
     "styled-jsx": "^2.2.5",
+    "styled-jsx-plugin-sass": "^0.2.3",
     "url-loader": "^0.6.2",
     "webpack": "^3.10.0",
     "webpack-hot-middleware": "^2.21.1",

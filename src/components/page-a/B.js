@@ -9,7 +9,12 @@ class Element extends Component {
   componentDidMount() { }
   componentWillUnmount() { }
   render() {
-    return <h1 id='test'>Test2, <Link to='/test-b'>{this.props.name}</Link></h1>;
+    return <h1>
+      <Link to='/page-b'>{this.props.name}</Link>
+      <style jsx>{`
+      `}
+      </style>
+    </h1>
   }
 }
 
