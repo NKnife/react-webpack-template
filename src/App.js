@@ -12,7 +12,7 @@ class App extends Component {
         <div>
           <div className='box'>
             <span>top</span>
-            <img src='/static/static-image.jpg' />
+            <img src='./static/static-image.jpg' />
           </div>
           <Route exact path="/" component={PageA} />
           <Route exact path="/page-b" component={PageB} />
