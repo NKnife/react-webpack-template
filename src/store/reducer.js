@@ -2,7 +2,7 @@ import { combineReducers } from 'redux'
 
 // like vuex state
 const stateTree = {
-  stateName: 123
+  stateName: 'defalut value'
 }
 
 // like vuex mutation

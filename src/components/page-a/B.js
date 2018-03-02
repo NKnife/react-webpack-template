@@ -10,8 +10,19 @@ class Element extends Component {
   componentWillUnmount() { }
   render() {
     return <h1>
-      <Link to='/page-b'>{this.props.name}</Link>
+      <br />
+      <div>{this.props.name}</div>
+      <div>{this.props.value}</div>
+      <Link to='/page-b'><span>Tap to jump</span></Link>
       <style jsx>{`
+        h1 {
+          div {
+            color: #666;
+          }
+          span {
+            color: #7ac2ef;
+          }
+        }
       `}
       </style>
     </h1>

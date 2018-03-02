@@ -12,7 +12,7 @@ class Page extends Component {
 	}
 	componentDidMount() { }
 	componentWillUnmount() { }
-	// 捕获$emit
+	// 捕获 $emit
 	change(e) {
 		console.log(e);
 	}
@@ -27,7 +27,7 @@ class Page extends Component {
 		return (
 			<div>
 				<A name='Componet A name' onCustomEvent={this.change} />
-				<B name={this.props.stateName} />
+				<B name='Componet B name' value={this.props.stateName} />
 			</div>
 		);
 	}

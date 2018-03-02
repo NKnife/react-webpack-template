@@ -3,7 +3,7 @@ import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 
 class Element extends Component {
 	constructor(props) {
-		// 调用父级的constructor(props)
+		// 调用父级的 constructor(props)
 		super(props);
 		// 初始化 state
 		this.state = {
@@ -24,7 +24,7 @@ class Element extends Component {
 	}
 	render() {
 		// 条件渲染
-		let component = <span> Toggle</span>;
+		let component = <span>Tap to toggle</span>;
 		if (this.state.bool) {
 			// 列表渲染
 			component = [1].map(e => {
@@ -33,16 +33,16 @@ class Element extends Component {
 		}
 		// 返回组件
 		return <h1 onClick={this.setClick}>
+			{this.props.name} <br />
+			{component} <br />
 			<ReactCSSTransitionGroup
 				transitionName="tran"
 				transitionEnterTimeout={1000}
 				transitionLeaveTimeout={1000}
 			>
-				{/* 动画组件下的元素必须有key */}
+				{/* 动画组件下的元素必须有 key */}
 				<span key={this.state.bool ? 1 : 0}> Animate <br /></span>
 			</ReactCSSTransitionGroup>
-			{this.props.name} <br />
-			{component} <br />
 			<style jsx>{`
 				h1 {
 					color: #ccc;
