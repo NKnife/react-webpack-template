@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
+import { CSSTransition, TransitionGroup } from 'react-transition-group'
 
 class Element extends Component {
 	constructor(props) {
@@ -35,31 +35,35 @@ class Element extends Component {
 		return <h1 onClick={this.setClick}>
 			{this.props.name} <br />
 			{component} <br />
-			<ReactCSSTransitionGroup
-				transitionName="tran"
-				transitionEnterTimeout={1000}
-				transitionLeaveTimeout={1000}
-			>
-				{/* 动画组件下的元素必须有 key */}
-				<span key={this.state.bool ? 1 : 0}> Animate <br /></span>
-			</ReactCSSTransitionGroup>
+			<TransitionGroup>
+				{!this.state.bool && (
+					<CSSTransition
+						classNames="tran"
+						timeout={9400}
+						in={this.state.bool}
+					>
+						<div>
+							<span> Animate <br /></span>
+						</div>
+					</CSSTransition>
+				)}
+			</TransitionGroup>
 			<style jsx>{`
 				h1 {
 					color: #ccc;
 				}
-				.tran-enter {
-					opacity: 0.01;
+				.tran-enter, .tran-exit.tran-exit-active {
+					span {
+						opacity: 0;
+					}
 				}
-				.tran-enter.tran-enter-active {
-					opacity: 1;
-					transition: opacity 500ms ease-in;
-				}
-				.tran-leave {
-					opacity: 1;
-				}
-				.tran-leave.tran-leave-active {
-					opacity: 0.01;
-					transition: opacity 300ms ease-in;
+				.tran-exit, .tran-enter.tran-enter-active {
+					* {
+						transition: all .4s;
+					}
+					span {
+						opacity: 1;
+					}
 				}
 			`}</style>
 		</h1>;
