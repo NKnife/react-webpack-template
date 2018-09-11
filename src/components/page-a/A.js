@@ -39,7 +39,7 @@ class Element extends Component {
 				{!this.state.bool && (
 					<CSSTransition
 						classNames="tran"
-						timeout={9400}
+						timeout={400}
 						in={this.state.bool}
 					>
 						<div>

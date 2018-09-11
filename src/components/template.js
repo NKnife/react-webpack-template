@@ -1,18 +1,16 @@
 import React, { Component } from 'react';
-import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
+import { CSSTransition, TransitionGroup } from 'react-transition-group';
+import p from '@/js/plugins';
 
 class Element extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {}
 	}
+	componentWillMount() { }
 	componentDidMount() { }
-	componentWillUnmount() { }
 	render() {
 		return <div>
-
-			<style jsx>{`
-			`}</style>
 		</div>;
 	}
 }

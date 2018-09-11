@@ -1,11 +1,22 @@
 import '@/css/app.css';
 import React, { Component } from 'react';
-import { HashRouter as Router, Route } from 'react-router-dom'
+import { HashRouter as Router, Route } from 'react-router-dom';
 import PageA from '@/pages/page-a';
 import PageB from '@/pages/page-b';
 import image from '@/assets/image.jpg';
 
 class App extends Component {
+  state = {
+    pagesArray: [
+      { path: '/', component: PageA },
+      { path: '/page-b', component: PageB },
+    ],
+  }
+  pages() {
+    return this.state.pagesArray.map((e, i) => (
+      <Route exact key={i} path={e.path} component={e.component} />
+    ))
+  }
   render() {
     return (
       <Router>
@@ -14,8 +25,7 @@ class App extends Component {
             <span>top</span>
             <img src='./static/static-image.jpg' />
           </div>
-          <Route exact path="/" component={PageA} />
-          <Route exact path="/page-b" component={PageB} />
+          {this.pages()}
           <div className='box'>
             <span>bottom</span>
             <img src={image} />
