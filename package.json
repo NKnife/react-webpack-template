@@ -3,9 +3,6 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "bezier-easing": "^2.1.0",
-    "moment": "^2.23.0",
-    "quill": "^2.0.0-dev.3",
     "axios": "^0.17.1",
     "react": "^16.2.0",
     "react-addons-css-transition-group": "^15.6.2",
