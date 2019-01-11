@@ -1,7 +1,6 @@
 var path = require('path')
 var utils = require('./utils')
-var config = require('./config');
-var ExtractTextPlugin = require('extract-text-webpack-plugin')
+var config = require('./config')
 
 function resolve (dir) {
   return path.join(__dirname, '..', dir)
@@ -29,7 +28,10 @@ module.exports = {
       {
         test: /\.jsx?$/,
         loader: 'babel-loader',
-        include: [resolve('src')],
+        include: [
+          resolve('src'),
+          resolve('node_modules/quill')
+        ],
       },
       {
         test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,

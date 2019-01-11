@@ -6,21 +6,68 @@ var merge = require('webpack-merge')
 var baseWebpackConfig = require('../config/webpack.base.conf')
 var CopyWebpackPlugin = require('copy-webpack-plugin')
 var HtmlWebpackPlugin = require('html-webpack-plugin')
-var ExtractTextPlugin = require('extract-text-webpack-plugin')
-var OptimizeCSSPlugin = require('optimize-css-assets-webpack-plugin')
+var TerserPlugin = require('terser-webpack-plugin')
+var MiniCssExtractPlugin = require("mini-css-extract-plugin")
+var OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin")
 
 var webpackConfig = merge(baseWebpackConfig, {
+  mode: 'production',
   module: {
-    rules: utils.styleLoaders({
-      sourceMap: config.build.productionSourceMap,
-      extract: true
-    })
+    rules: [{
+        test: /\.(sa|sc|c)ss$/,
+        use: [
+            MiniCssExtractPlugin.loader,
+            'css-loader',
+            {
+              loader: 'postcss-loader',
+              options: {
+                ident: 'postcss',
+                plugins: [
+                  require('autoprefixer')(),
+                ]
+              }
+            },
+            'sass-loader',
+        ]
+    }]
   },
   devtool: config.build.productionSourceMap ? '#source-map' : false,
   output: {
     path: config.build.assetsRoot,
     filename: utils.assetsPath('js/[name].[chunkhash].js'),
-    chunkFilename: utils.assetsPath('js/[id].[chunkhash].js')
+    // chunkFilename: utils.assetsPath('js/[id].[chunkhash].js')
+  },
+  optimization: {
+    runtimeChunk: {
+      name: 'manifest',
+    },
+    minimizer: [
+      new TerserPlugin({
+        cache: true,
+        parallel: true,
+        sourceMap: true,
+        terserOptions: {
+          warnings: false,
+        }
+      }),
+      new OptimizeCSSAssetsPlugin({
+        cssProcessorOptions: {
+          safe: true
+        }
+      })
+    ],
+    splitChunks: {
+      chunks: 'all',
+      minSize: 30000,
+      minChunks: 1,
+      cacheGroups: {
+        vendor: {
+          name: 'vendors',
+          chunks: 'all',
+          test: /[\\/]node_modules[\\/]/,
+        }
+      }
+    }
   },
   plugins: [
     new webpack.DefinePlugin({
@@ -28,20 +75,8 @@ var webpackConfig = merge(baseWebpackConfig, {
         NODE_ENV: JSON.stringify(config.build.env)
       }
     }),
-    new webpack.optimize.UglifyJsPlugin({
-      compress: {
-        warnings: false,
-        pure_funcs: ['console.log']
-      },
-      sourceMap: true
-    }),
-    new ExtractTextPlugin({
+    new MiniCssExtractPlugin({
       filename: utils.assetsPath('css/[name].[contenthash].css')
-    }),
-    new OptimizeCSSPlugin({
-      cssProcessorOptions: {
-        safe: true
-      }
     }),
     new HtmlWebpackPlugin({
       filename: config.build.index,
@@ -55,22 +90,6 @@ var webpackConfig = merge(baseWebpackConfig, {
         // https://github.com/kangax/html-minifier#options-quick-reference
       },
       chunksSortMode: 'dependency'
-    }),
-    new webpack.optimize.CommonsChunkPlugin({
-      name: 'vendor',
-      minChunks: function (module, count) {
-        return (
-          module.resource &&
-          /\.js$/.test(module.resource) &&
-          module.resource.indexOf(
-            path.join(__dirname, '../node_modules')
-          ) === 0
-        )
-      }
-    }),
-    new webpack.optimize.CommonsChunkPlugin({
-      name: 'manifest',
-      chunks: ['vendor']
     }),
     // copy custom static assets
     new CopyWebpackPlugin([
